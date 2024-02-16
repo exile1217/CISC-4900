@@ -15,6 +15,64 @@ body {
     font-family: 'Nunito',sans-serif;
     background-color:azure;   
 }
+
+#instructions {
+  margin-bottom: 20px; /* Add margin-bottom to create space below the instructions */
+}
+
+.form {
+  --width-of-input: 200px;
+  --border-height: 1px;
+  --border-before-color: rgba(221, 221, 221, 0.39);
+  --border-after-color: #5891ff;
+  --input-hovered-color: #4985e01f;
+  position: relative;
+  width: var(--width-of-input);
+ }
+ .search-bar-center {
+  margin: 0;
+  position: absolute;
+  top: 50%; /* Adjust as needed */
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+ }
+ /* styling of Input */
+ .input {
+  color: black;
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  border-bottom: var(--border-height) solid var(--border-before-color);
+ }
+ /* styling of animated border */
+ .input-border {
+  position: absolute;
+  background: var(--border-after-color);
+  width: 0%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transition: 0.3s;
+ }
+ /* Hover on Input */
+ input:hover {
+  background: var(--input-hovered-color);
+ }
+ 
+ input:focus {
+  outline: none;
+ }
+ /* here is code of animated border */
+ input:focus ~ .input-border {
+  width: 100%;
+ }
+ 
+
 button {
   border:none;
   background-color:darkslategrey;
@@ -22,7 +80,7 @@ button {
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: incline-block;
   font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
@@ -83,7 +141,7 @@ button:active {
 .center {
   margin: 0;
   position: absolute;
-  top: 30%;
+  top: 70%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
