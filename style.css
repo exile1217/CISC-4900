@@ -54,6 +54,7 @@ color: paleturquoise;
   padding-block: 0.7em;
   border: none;
   border-bottom: var(--border-height) solid var(--border-before-color);
+  color: paleturquoise;
  }
  /* styling of animated border */
  .input-border {
@@ -64,6 +65,7 @@ color: paleturquoise;
   bottom: 0;
   left: 0;
   transition: 0.3s;
+  
  }
  /* Hover on Input */
  input:hover {
