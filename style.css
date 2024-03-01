@@ -1,5 +1,5 @@
 body {
-    background-color:paleturquoise;
+    background-color:none;
   }
  
   #container{ 
@@ -16,12 +16,14 @@ body {
     background-color:azure;   
 }
 #heading{
+text-align:center;
 color: paleturquoise;
 }
 
 #instructions {
   margin-bottom: 20px; /* Add margin-bottom to create space below the instructions */
   color:paleturquoise;
+  text-align:center;
 }
 
 .form {
@@ -90,7 +92,7 @@ button {
   cursor: pointer;
   border-radius: 50%;
 }
-button:hover{
+ button:hover{
   background-color: #04AA6D; /* Green on hover */
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -98,7 +100,7 @@ button:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-}
+} 
 .btn {
   border: none;
   width: 15em;
@@ -189,9 +191,9 @@ button:active {
 .card {
   width: 500px;
   height: 900px;
-  border-radius: 20px;
+  border-radius: 17px;
   padding: 6px;
-  /* box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px; */
+  /*box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px; */
   background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
 }
 
