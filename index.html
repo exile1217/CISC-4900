@@ -6,41 +6,39 @@
     <link rel="stylesheet" href="style.css">
     <title>4900</title>
 </head>
-<body>
-    <div id="container">
-
-        <div id="heading">
-        <h1> DineFinder</h1>
-        </div>
-
-        <div id="instructions">
-            <h2>How to Use DineFinder</h2>
-            <p>Welcome to DineFinder! This website helps you discover new restaurants in your area.</p>
-            <p>To get started, you can either input your location manually or allow the website to detect your location automatically.</p>
-            <p>Once you've set your location, simply click the "Generate" button below to find a random restaurant recommendation.</p>
-            <p></p>Click the button to find a random restaurant near you!</p>
-        </div>
-
-        <!-- Text bar -->
-        <div class="search-bar-center">
-        <div class="form">
-            <input class="input" placeholder="Type your text" required="" type="text">
-            <span class="input-border"></span>
-        </div>
-        </div>
+<body class = "background">
+    <div class="card">
+        <div class="card__content">
+            <div id="heading">
+                <h1> DineFinder</h1>
+                </div>
         
-        <!-- first iteration of the button
-        <button id="button" type="button">Generate</button> -->  
-        <div class="center">
-        <button class="btn"  id="gen" onclick="">
-            <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
-                <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
-            </svg>
-            <span class="text">Generate</span>
-        </button>
-        
-        </div>
+                <div id="instructions">
+                    <h2>How to Use DineFinder</h2>
+                    <p>Welcome to DineFinder! This website helps you discover new restaurants in your area.</p>
+                    <p>Click the button to find a random restaurant near you!</p>
+                </div>
+<!-- Text bar -->
+<div class="search-bar-center">
+    <div class="form">
+        <input class="input" placeholder="Type your text" required="" type="text">
+        <span class="input-border"></span>
+    </div>
+    </div>
     
+    <!-- first iteration of the button
+    <button id="button" type="button">Generate</button> -->  
+    <div class="center">
+    <button class="btn"  id="gen" onclick="">
+        <svg height="24" width="24" fill="#FFFFFF" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1" class="sparkle">
+            <path d="M10,21.236,6.755,14.745.264,11.5,6.755,8.255,10,1.764l3.245,6.491L19.736,11.5l-6.491,3.245ZM18,21l1.5,3L21,21l3-1.5L21,18l-1.5-3L18,18l-3,1.5ZM19.333,4.667,20.5,7l1.167-2.333L24,3.5,21.667,2.333,20.5,0,19.333,2.333,17,3.5Z"></path>
+        </svg>
+        <span class="text">Generate</span>
+    </button>
+    
+    </div>
+
+        </div>
     </div>
     
 <script src="script.js"></script>
