@@ -1,4 +1,4 @@
-var btn = document.getElementById("center");
+var btn = document.getElementById("gen");
 btn.addEventListener("click",sayHello);
 
 function sayHello(){
