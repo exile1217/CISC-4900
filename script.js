@@ -39,4 +39,3 @@ async function findRestaurant() {
       alert("Geolocation is not supported by this browser.");
   }
 }
-
