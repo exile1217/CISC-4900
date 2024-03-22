@@ -38,7 +38,7 @@ color: paleturquoise;
  .search-bar-center {
   margin: 0;
   position: absolute;
-  top: 40%; /* Adjust to move search bar*/
+  top: 40%; /* Adjust top and left move search bar*/
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
@@ -172,9 +172,9 @@ button:active {
   font-weight: 700;
   transition: 0.6s;
   box-shadow: 0px 0px 60px #1f4c65;
-  -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
+  /* -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4)); */
   position:absolute;
-  top:25%;  /* adjust top and left to move button */
+  top:30%;  /* adjust top and left to move button */
   left:30%;
 }
 
