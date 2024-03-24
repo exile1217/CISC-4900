@@ -16,14 +16,20 @@
                 <div id="instructions">
                     <h2>How to Use DineFinder</h2>
                     <p>Welcome to DineFinder! This website helps you discover new restaurants in your area.</p>
-                    <p>Click the button to find a random restaurant near you!</p>
-                    <p id="restaurant">Your location will be shown here when button is clicked </p>
+                    <p>Click show location below, then input it and submit</p>
+                    <button id="lat/long"> Show location </button>
+                    <p id="result"></p>
                 </div>
 <!-- Text bar -->
 <div class="search-bar-center">
     <div class="form">
-        <input class="input" placeholder="Type your text" required="" type="text">
-        <span class="input-border"></span>
+        <!-- <input class="input" placeholder="Type your text" required="" type="text"> 
+         <span class="input-border"></span> -->
+        <form id="locationForm">
+            Latitude: <input class="input" type="text" id="latitude" required><br>
+            Longitude: <input class="input" type="text" id="longitude" required><br>
+            <!-- <button id="location" type="submit">Submit</button> -->
+        </form>
     </div>
 </div>
     

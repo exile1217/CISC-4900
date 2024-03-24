@@ -26,6 +26,15 @@ color: paleturquoise;
   text-align:center;
 }
 
+#locationForm{
+color:paleturquoise;
+
+}
+
+#location{
+  margin-top:10px;
+}
+
 .form {
   --width-of-input: 200px;
   --border-height: 1px;
@@ -38,23 +47,23 @@ color: paleturquoise;
  .search-bar-center {
   margin: 0;
   position: absolute;
-  top: 40%; /* Adjust top and left move search bar*/
+  top: 38%; /* Adjust top and left move search bar*/
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
  }
  /* styling of Input */
  .input {
-  color: black;
+  color:black;
   font-size: 0.9rem;
-  background-color: transparent;
+  background-color:cornflowerblue;
   width: 100%;
   box-sizing: border-box;
   padding-inline: 0.5em;
   padding-block: 0.7em;
   border: none;
   border-bottom: var(--border-height) solid var(--border-before-color);
-  color: paleturquoise;
+  color: black;
  }
  /* styling of animated border */
  .input-border {
@@ -68,10 +77,10 @@ color: paleturquoise;
   
  }
  /* Hover on Input */
- input:hover {
+ /* input:hover {
   background: var(--input-hovered-color);
  }
- 
+  */
  input:focus {
   outline: none;
  }
@@ -172,9 +181,9 @@ button:active {
   font-weight: 700;
   transition: 0.6s;
   box-shadow: 0px 0px 60px #1f4c65;
-  /* -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4)); */
+  -webkit-box-reflect: below 10px linear-gradient(to bottom, rgba(0,0,0,0.0), rgba(0,0,0,0.4));
   position:absolute;
-  top:30%;  /* adjust top and left to move button */
+  top:50%;  /* adjust top and left to move button */
   left:30%;
 }
 
@@ -187,6 +196,4 @@ button:active {
   background: linear-gradient(270deg, rgba(2, 29, 78, 0.681) 0%, rgba(31, 215, 232, 0.873) 60%);
   color: rgb(4, 4, 38);
 }
-
-
 
