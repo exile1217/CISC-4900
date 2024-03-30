@@ -1,68 +1,82 @@
 var btn = document.getElementById("lat/long");
 btn.addEventListener("click",getLocation);
 
-function sayHello(){
-    alert("Hello!");
-}
 
 //gets location and displays it, in terms of longitude and latitude
-  const x = document.getElementById("lat/long");
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(getAndDisplayPosition);
-    } else {
-      x.innerHTML = "Geolocation is not supported by this browser.";
+const x = document.getElementById("lat/long");
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(getAndDisplayPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+  
+function getAndDisplayPosition(position) {
+  const lat = position.coords.latitude;
+  const long = position.coords.longitude;
+  x.innerHTML = "Latitude: " + lat +
+  "<br>Longitude: " + long;
+  document.getElementById("latitude").value = lat;
+  document.getElementById("longitude").value = long;
+}
+  
+document.getElementById("gen").addEventListener("click", generateRestaurant);
+
+function generateRestaurant(){ //function for generating restaurant
+    console.log("generate button clicked");
+    const latitude = parseFloat(document.getElementById("latitude").value); //maybe should parsefloat??
+    const longitude = parseFloat(document.getElementById("longitude").value);
+    //Test and print to console after input
+    console.log(latitude);
+    console.log(longitude);
+
+    //Validate latitude and longitude inputs
+    if (!latitude || !longitude) {
+      alert("Please enter latitude and longitude values.");
+      return;
     }
-  }
+    if (isNaN(latitude) || isNaN(longitude)) {
+      alert("Latitude and longitude must be numerical values.");
+      return;
+    }
+    if (latitude < -90 || latitude > 90) {
+      alert("Latitude must be between -90 and 90 degrees.");
+      return;
+    }
+    if (longitude < -180 || longitude > 180) {
+      alert("Longitude must be between -180 and 180 degrees.");
+      return;
+    }
+
+    //Call function to fetch random restaurant based on location
+    fetchRandomRestaurant(latitude, longitude);
+}
+
+//Here you make requests to your backend server passing the location data
+function fetchRandomRestaurant(latitude, longitude){
+  //Construct the URL for your backend endpoint
+  const backendURL = 'http://localhost:3000';
   
-  function getAndDisplayPosition(position) {
-    const lat = position.coords.latitude;
-    const long = position.coords.longitude;
-    x.innerHTML = "Latitude: " + lat +
-    "<br>Longitude: " + long;
-  }
-  
-  document.getElementById('locationForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent form submission
-    var latitude = document.getElementById('latitude').value;
-    var longitude = document.getElementById('longitude').value;
-    findRandomRestaurant(latitude, longitude);
+  //Create a JSON object with the latitude and longitude data
+  const locationData = { latitude, longitude };
+
+  //Send an HTTP POST request to backend
+  fetch(backendURL, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(locationData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Response from backend:', data);
+  })
+  .catch(error => {
+    console.error('Error sending location to backend:', error);
   });
-  
-  function findRandomRestaurant(latitude, longitude) {
-    var url = 'https://api.yelp.com/v3/businesses/search?latitude=' + latitude + '&longitude=' + longitude + '&categories=restaurants&limit=50';
-    var apiKey = 'YOUR_YELP_API_KEY';
-  
-    fetch(url, {
-      headers: {
-        'Authorization': 'Bearer ' + apiKey
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.businesses && data.businesses.length > 0) {
-        var randomIndex = Math.floor(Math.random() * data.businesses.length);
-        var randomRestaurant = data.businesses[randomIndex];
-        displayRestaurant(randomRestaurant);
-      } else {
-        displayError('No restaurants found');
-      }
-    })
-    .catch(error => {
-      alert('Error fetching restaurants: ' + error.message);
-    });
-  }
-  
-  function displayRestaurant(restaurant) {
-    var resultDiv = document.getElementById('result');
-    resultDiv.innerHTML = '';
-    var name = document.createElement('h2');
-    name.textContent = restaurant.name;
-    var address = document.createElement('p');
-    address.textContent = restaurant.location.address1 + ', ' + restaurant.location.city;
-    resultDiv.appendChild(name);
-    resultDiv.appendChild(address);
-  }
+}
   
 // Geolocation code 
 // const successCallback = (position) => {

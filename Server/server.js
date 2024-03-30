@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -9,18 +10,44 @@ let currentPage = 0; //Initial page
 const pageSize = 50; //Max number of items per request
 let totalResults = 0; //Initial amount of restaurants before api call
 let allResults = []; //Store all restaurants in array
+let currentLat; //Latitude from user
+let currentLong; //Longitude from user
+
+
+//Enable CORS for all routes
+app.use(cors());
+//Parse JSON bodies
+app.use(express.json());
+
+//Define route for receiving location data from frontend
+app.post('/', async (req, res) => {
+    try {
+        const {latitude, longitude} = req.body;
+
+        //Received location data
+        console.log('Received location:', {latitude, longitude});
+        currentLat = latitude;
+        currentLong = longitude;
+
+    } catch (error) {
+        console.error('Error processing location data:', error);
+        res.status(500).send('Error processing location data');
+    }
+});
 
 
 // Define route for Yelp API proxy
 app.get('/', async (req, res) => {
 
     try {
+        
         // Make initial request to get total results
         const initialResponse = await axios.get('https://api.yelp.com/v3/businesses/search', {
             params: {
-                location: '2900 BedFord Ave Brooklyn', // Example parameter
+                latitude: currentLat,
+                longitude: currentLong,
                 limit: pageSize, //Determines the amount of restaurants per request, in this case 50. 
-                radius: 10000, //10000 meter radius. Use to minimize total results. Can be used as a filter
+                //radius: 300, //10000 meter radius. Use to minimize total results. Can be used as a filter
                 offset: currentPage * pageSize //Offset determines the range of restaurants per request. 
             },                                 //Offset 0 will return restaurants from 1 to 50, including 50.
                                                //Offset 50 will return restaurants from 51 to 100, including 100.
@@ -36,14 +63,14 @@ app.get('/', async (req, res) => {
         //Yelp has restriction that limit + offset must be < 1000. It is built into the Fusion API.
         //Making Business Search endpoint requests where limit+offset>1000 currently will return an error message with that explanation.
         while (currentPage * pageSize < totalResults && (currentPage * pageSize) + pageSize < 1000) { //Check if there are more results and fits within Yelp's restrictions
-            console.log(currentPage + ", offset:" + currentPage * pageSize );
-            console.log(currentPage * pageSize < totalResults);
-            console.log((currentPage * pageSize) + pageSize <= 1000);
+            console.log("Page: ", currentPage + "   offset:" + currentPage * pageSize );
+        
             const response = await axios.get('https://api.yelp.com/v3/businesses/search', {
                 params: {
-                    location: '2900 BedFord Ave Brooklyn', // Example parameter
+                    latitude: currentLat,
+                    longitude: currentLong,
                     limit: pageSize,
-                    radius: 10000,
+                    //radius: 10000,
                     offset: currentPage * pageSize 
                 },
                 headers: {
@@ -65,6 +92,8 @@ app.get('/', async (req, res) => {
         }
     }
 });
+
+
 
 //Start the server
 app.listen(PORT, () => {
