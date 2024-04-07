@@ -54,28 +54,26 @@ function generateRestaurant(){ //function for generating restaurant
 }
 
 //Here you make requests to your backend server passing the location data
-function fetchRandomRestaurant(latitude, longitude){
-  //Construct the URL for your backend endpoint
-  const backendURL = 'http://localhost:3000';
-  
-  //Create a JSON object with the latitude and longitude data
-  const locationData = { latitude, longitude };
+function fetchRandomRestaurant(latitude, longitude) {
+  // Construct the URL for the backend endpoint passing in location data
+  const backendURL = `http://localhost:3000/restaurants?latitude=${latitude}&longitude=${longitude}`;
 
-  //Send an HTTP POST request to backend
-  fetch(backendURL, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(locationData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Response from backend:', data);
-  })
-  .catch(error => {
-    console.error('Error sending location to backend:', error);
-  });
+  // Make a GET request to the backend
+  fetch(backendURL)
+      .then(response => {
+          if (response.ok) {
+              return response.json(); // Parse JSON response
+          } else {
+              throw new Error('Failed to fetch restaurants from backend');
+          }
+      })
+      .then(data => {
+          console.log('Response from backend:', data);
+          // Handle the response data as needed
+      })
+      .catch(error => {
+          console.error('Error fetching restaurants from backend:', error.message);
+      });
 }
   
 // Geolocation code 
