@@ -70,71 +70,70 @@ function fetchRandomRestaurant(latitude, longitude) {
       .then(data => {
           console.log('Response from backend:', data);
           // Handle the response data as needed
+          if (data.length > 0) {
+            const randomIndex = Math.floor(Math.random() * data.length);
+            const randomRestaurant = data[randomIndex];
+            console.log('Randomly selected restaurant:', randomRestaurant);
+            // Further processing with the random restaurant
+          } else {
+            console.log('No restaurants found in the response.');
+          }
       })
       .catch(error => {
           console.error('Error fetching restaurants from backend:', error.message);
       });
-}
-  
-// Geolocation code 
-// const successCallback = (position) => {
-//   console.log(position);
-//   };
-  
-//   const errorCallback = (error) => {
-//     console.log(error);
-//   };
-  
-// navigator.geolocation.getCurrentPosition(successCallback,errorCallback);
+    }
 
-    // const apiKey = 'pxpuU19gDhxBiwnQ4shNHcjX-WOCHr7hy5O6LIvqR38leKvabywinbTNsfSuEG2baO_TIXbSEH7-Mi_fvVF-rGZkF9YmiQeBlUn2cQdhmQNDuLBJXJp1xClUiqzPZXYx';
+  function displayRandomRestaurant(restaurantName) {
+      const randomResultElement = document.getElementById('result');
+      randomResultElement.innerHTML = `<h2>Random Restaurant:</h2><p>${restaurantName}</p>`;
+    }
+  
+// const apiKey = 'pxpuU19gDhxBiwnQ4shNHcjX-WOCHr7hy5O6LIvqR38leKvabywinbTNsfSuEG2baO_TIXbSEH7-Mi_fvVF-rGZkF9YmiQeBlUn2cQdhmQNDuLBJXJp1xClUiqzPZXYx';
     
-    // const endpoint = 'https://api.yelp.com/v3/businesses/search';
-    // //const endpoint = "http://localhost:3000/search";
+//     const endpoint = 'https://api.yelp.com/v3/businesses/search';
+//     //const endpoint = "http://localhost:3000/search";
     
-    // function findRandomRestaurant() {
-    //   const location = prompt('Enter your location (e.g., New York):');
-    //   if (!location) return;
+//     function findRandomRestaurant() {
+//       const location = prompt('Enter your location (e.g., New York):');
+//       if (!location) return;
 
-    //   const searchTerm = 'restaurants';
-    //   const url = `${endpoint}?term=${searchTerm}&location=${location}`;
+//       const searchTerm = 'restaurants';
+//       const url = `${endpoint}?term=${searchTerm}&location=${location}`;
 
-    //   fetch(url, {
-    //     headers: {
-    //       Authorization: `Bearer ${apiKey}`
-    //     }
-    //   })
-    //   .then(response => {
-    //     if (!response.ok) {
-    //       throw new Error('Network response was not ok');
-    //     }
-    //     return response.json();
-    //   })
-    //   .then(data => {
-    //     // Filter the results to include only restaurants
-    //     const restaurantResults = data.businesses.filter(business => {
-    //       return business.categories.some(category => category.alias === 'restaurants');
-    //     });
+//       fetch(url, {
+//         headers: {
+//           Authorization: `Bearer ${apiKey}`
+//         }
+//       })
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error('Network response was not ok');
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         // Filter the results to include only restaurants
+//         const restaurantResults = data.businesses.filter(business => {
+//           return business.categories.some(category => category.alias === 'restaurants');
+//         });
         
-    //     // If no restaurants found, display a message
-    //     if (restaurantResults.length === 0) {
-    //       displayRandomRestaurant('No restaurants found in the specified location.');
-    //       return;
-    //     }
+//         // If no restaurants found, display a message
+//         if (restaurantResults.length === 0) {
+//           displayRandomRestaurant('No restaurants found in the specified location.');
+//           return;
+//         }
 
-    //     // Select a random restaurant
-    //     const randomIndex = Math.floor(Math.random() * restaurantResults.length);
-    //     const randomRestaurant = restaurantResults[randomIndex];
+//         // Select a random restaurant
+//         const randomIndex = Math.floor(Math.random() * restaurantResults.length);
+//         const randomRestaurant = restaurantResults[randomIndex];
 
-    //     // Display the random restaurant
-    //     displayRandomRestaurant(randomRestaurant.name);
-    //   })
-    //   .catch(error => {
-    //     console.error('Error fetching data:', error);
-    //   });
-    // }
+//         // Display the random restaurant
+//         displayRandomRestaurant(randomRestaurant.name);
+//       })
+//       .catch(error => {
+//         console.error('Error fetching data:', error);
+//       });
+//     }
 
-    // function displayRandomRestaurant(restaurantName) {
-    //   const randomResultElement = document.getElementById('restaurant');
-    //   randomResultElement.innerHTML = `<h2>Random Restaurant:</h2><p>${restaurantName}</p>`;
-    // }
+    
