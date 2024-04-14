@@ -15,8 +15,7 @@ function getLocation() {
 function getAndDisplayPosition(position) {
   const lat = position.coords.latitude;
   const long = position.coords.longitude;
-  x.innerHTML = "Latitude: " + lat +
-  "<br>Longitude: " + long;
+  x.innerHTML = "Latitude: " + lat + "<br>Longitude: " + long;
   document.getElementById("latitude").value = lat;
   document.getElementById("longitude").value = long;
 }
@@ -73,10 +72,11 @@ function fetchRandomRestaurant(latitude, longitude) {
           if (data.length > 0) {
             const randomIndex = Math.floor(Math.random() * data.length);
             const randomRestaurant = data[randomIndex];
+            displayRestaurant(randomRestaurant);
             console.log('Randomly selected restaurant:', randomRestaurant);
             // Further processing with the random restaurant
           } else {
-            console.log('No restaurants found in the response.');
+            alert('No restaurants found in the response.');
           }
       })
       .catch(error => {
@@ -84,56 +84,13 @@ function fetchRandomRestaurant(latitude, longitude) {
       });
     }
 
-  function displayRandomRestaurant(restaurantName) {
-      const randomResultElement = document.getElementById('result');
-      randomResultElement.innerHTML = `<h2>Random Restaurant:</h2><p>${restaurantName}</p>`;
-    }
-  
-// const apiKey = 'pxpuU19gDhxBiwnQ4shNHcjX-WOCHr7hy5O6LIvqR38leKvabywinbTNsfSuEG2baO_TIXbSEH7-Mi_fvVF-rGZkF9YmiQeBlUn2cQdhmQNDuLBJXJp1xClUiqzPZXYx';
-    
-//     const endpoint = 'https://api.yelp.com/v3/businesses/search';
-//     //const endpoint = "http://localhost:3000/search";
-    
-//     function findRandomRestaurant() {
-//       const location = prompt('Enter your location (e.g., New York):');
-//       if (!location) return;
-
-//       const searchTerm = 'restaurants';
-//       const url = `${endpoint}?term=${searchTerm}&location=${location}`;
-
-//       fetch(url, {
-//         headers: {
-//           Authorization: `Bearer ${apiKey}`
-//         }
-//       })
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//       })
-//       .then(data => {
-//         // Filter the results to include only restaurants
-//         const restaurantResults = data.businesses.filter(business => {
-//           return business.categories.some(category => category.alias === 'restaurants');
-//         });
-        
-//         // If no restaurants found, display a message
-//         if (restaurantResults.length === 0) {
-//           displayRandomRestaurant('No restaurants found in the specified location.');
-//           return;
-//         }
-
-//         // Select a random restaurant
-//         const randomIndex = Math.floor(Math.random() * restaurantResults.length);
-//         const randomRestaurant = restaurantResults[randomIndex];
-
-//         // Display the random restaurant
-//         displayRandomRestaurant(randomRestaurant.name);
-//       })
-//       .catch(error => {
-//         console.error('Error fetching data:', error);
-//       });
-//     }
-
-    
+    function displayRestaurant(restaurant) {
+      // Assuming there is a <div> element with id "restaurant-info" where you want to display the restaurant info
+      const restaurantInfoDiv = document.getElementById('result');
+      restaurantInfoDiv.innerHTML = `
+          <h2>${restaurant.name}</h2>
+          <p>Rating: ${restaurant.rating}</p>
+          <p>Address: ${restaurant.location.address1}</p> 
+          `;
+          //Add more display info such as image, phone, yelp url
+  }
