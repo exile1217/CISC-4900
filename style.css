@@ -2,10 +2,10 @@ body {
     background-color:none;
   }
 
-  #result{
+  #result{ /*adjust info position*/
     position:absolute;
-    top: 60%;
-    left:30%;
+    top: 10%;
+    left: 20%;
   }
  
 #container{ 
