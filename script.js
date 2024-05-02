@@ -118,6 +118,9 @@ function fetchRandomRestaurant(latitude, longitude) {
                 <p>Rating: ${restaurant.rating}</p>
                 <p>Address: ${restaurant.location.display_address}</p>
                 <p>Phone: ${restaurant.display_phone}</p>
+                <a href="${restaurant.url}" target="_blank" style="color:paleturquoise;"> Yelp </a>
+                <p>
+                <a href="index.html" style="color: paleturquoise;"> Home Page</a>
                 `;
             } else {
                 // If the element is not found, display an error message
@@ -129,6 +132,10 @@ function fetchRandomRestaurant(latitude, longitude) {
         console.error("Failed to open new window.");
     }
 }
+
+
+
+
 
 
 
