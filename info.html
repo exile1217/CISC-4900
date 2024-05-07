@@ -19,6 +19,41 @@
             
         </div>
     </div>
+
+    <script>
+        window.onload = function() {
+            // Parse the query parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            const rating = urlParams.get('rating');
+            const address = urlParams.get('address');
+            const phone = urlParams.get('phone');
+            const image = urlParams.get('image');
+            const url = urlParams.get('url');
+
+            // Find the elements in the current page where you want to display the restaurant information
+            const restaurantInfoDiv = document.getElementById('result');
+            const imageSize = 'width="300" height="250"'; //image size
+
+            // Check if the elements exist
+            if (restaurantInfoDiv) {
+                // Inject the restaurant information into the elements
+                restaurantInfoDiv.innerHTML = `
+                    <img src="${image}" alt="${name}" ${imageSize}>
+                    <h2>${name}</h2>
+                    <p>Rating: ${rating}</p>
+                    <p>Address: ${address}</p>
+                    <p>Phone: ${phone}</p>
+                    <a href="${url}" target="_blank" style="color:paleturquoise;"> Yelp </a>
+                    <p>
+                    <a href="index.html" style="color: paleturquoise;"> Home Page</a> </p>
+                `;
+            } else {
+                // If the element is not found, display an error message
+                console.error("Element with ID 'result' not found in the current page.");
+            }
+        };
+    </script>
     
 <script src="script.js"></script>
 </body>

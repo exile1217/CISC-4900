@@ -1,6 +1,15 @@
 var btn = document.getElementById("lat/long");
 btn.addEventListener("click",getLocation);
 
+const successCallback = (position) => {
+  console.log(position);
+};
+
+const errorCallback = (error) => {
+  console.log(error);
+};
+
+navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
 
 //gets location and displays it, in terms of longitude and latitude
 const x = document.getElementById("lat/long");
@@ -95,43 +104,54 @@ function fetchRandomRestaurant(latitude, longitude) {
   // }
     
   //display function on separate page
-  function displayRestaurant(restaurant) {
-    // Create a new window to display the restaurant information
-    const newWindow = window.open("info.html");
+//   function displayRestaurant(restaurant) {
+//     // Create a new window to display the restaurant information
+//     const newWindow = window.open("info.html");
 
-    // Check if the new window has been opened successfully
-    if (newWindow) {
-        // Once the new window is loaded, inject the restaurant information into it
-        newWindow.onload = function() {
-            // Access the document of the new window
-            const newWindowDocument = newWindow.document;
+//     // Check if the new window has been opened successfully
+//     if (newWindow) {
+//         // Once the new window is loaded, inject the restaurant information into it
+//         newWindow.onload = function() {
+//             // Access the document of the new window
+//             const newWindowDocument = newWindow.document;
 
-            // Find the element in the new window where you want to display the restaurant information
-            const restaurantInfoDiv = newWindowDocument.getElementById('result');
-            const imageSize = 'width="300" height="250"'; //image size
-            // Check if the element exists in the new window
-            if (restaurantInfoDiv) {
-                // Inject the restaurant information into the element
-                restaurantInfoDiv.innerHTML = `
-                <img src="${restaurant.image_url}" alt="${restaurant.name}"${imageSize}>
-                <h2>${restaurant.name}</h2>
-                <p>Rating: ${restaurant.rating}</p>
-                <p>Address: ${restaurant.location.display_address}</p>
-                <p>Phone: ${restaurant.display_phone}</p>
-                <a href="${restaurant.url}" target="_blank" style="color:paleturquoise;"> Yelp </a>
-                <p>
-                <a href="index.html" style="color: paleturquoise;"> Home Page</a>
-                `;
-            } else {
-                // If the element is not found, display an error message
-                console.error("Element with ID 'result' not found in the new window.");
-            }
-        };
-    } else {
-        // If the new window failed to open, display an error message
-        console.error("Failed to open new window.");
-    }
+//             // Find the element in the new window where you want to display the restaurant information
+//             const restaurantInfoDiv = newWindowDocument.getElementById('result');
+//             const imageSize = 'width="300" height="250"'; //image size
+//             // Check if the element exists in the new window
+//             if (restaurantInfoDiv) {
+//                 // Inject the restaurant information into the element
+//                 restaurantInfoDiv.innerHTML = `
+//                 <img src="${restaurant.image_url}" alt="${restaurant.name}"${imageSize}>
+//                 <h2>${restaurant.name}</h2>
+//                 <p>Rating: ${restaurant.rating}</p>
+//                 <p>Address: ${restaurant.location.display_address}</p>
+//                 <p>Phone: ${restaurant.display_phone}</p>
+//                 <a href="${restaurant.url}" target="_blank" style="color:paleturquoise;"> Yelp </a>
+//                 <p>
+//                 <a href="index.html" style="color: paleturquoise;"> Home Page</a>
+//                 `;
+//             } else {
+//                 // If the element is not found, display an error message
+//                 console.error("Element with ID 'result' not found in the new window.");
+//             }
+//         };
+//     } else {
+//         // If the new window failed to open, display an error message
+//         console.error("Failed to open new window.");
+//     }
+// }
+
+function displayRestaurant(restaurant) {
+  // Construct the URL with query parameters containing the restaurant information
+  const infoUrl = `info.html?name=${encodeURIComponent(restaurant.name)}&rating=${restaurant.rating}&address=${encodeURIComponent(restaurant.location.display_address)}&phone=${restaurant.display_phone}&image=${encodeURIComponent(restaurant.image_url)}&url=${encodeURIComponent(restaurant.url)}`;
+
+  // Navigate the current tab to the constructed URL
+  window.location.href = infoUrl;
 }
+
+
+
 
 
 
