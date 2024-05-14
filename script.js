@@ -64,7 +64,7 @@ function generateRestaurant(){ //function for generating restaurant
 //Here you make requests to your backend server passing the location data
 function fetchRandomRestaurant(latitude, longitude) {
   // Construct the URL for the backend endpoint passing in location data
-  const backendURL = `https://dinefinder.onrender.com/restaurants?latitude=${latitude}&longitude=${longitude}`;
+  const backendURL = `https://dinefinder-backend.onrender.com/restaurants?latitude=${latitude}&longitude=${longitude}`;
 
   // Make a GET request to the backend
   fetch(backendURL)
@@ -92,55 +92,7 @@ function fetchRandomRestaurant(latitude, longitude) {
           console.error('Error fetching restaurants from backend:', error.message);
       });
     }
-  //  display function on home page
-  //     function displayRestaurant(restaurant) {
-  //       const restaurantInfoDiv = document.getElementById('result');
-  //       restaurantInfoDiv.innerHTML = `
-  //           <h2>${restaurant.name}</h2>
-  //           <p>Rating: ${restaurant.rating}</p>
-  //           <p>Address: ${restaurant.location.display_address}</p> 
-  //           `;
-  //         //Add more display info such as image, phone, yelp url
-  // }
-    
-  //display function on separate page
-//   function displayRestaurant(restaurant) {
-//     // Create a new window to display the restaurant information
-//     const newWindow = window.open("info.html");
 
-//     // Check if the new window has been opened successfully
-//     if (newWindow) {
-//         // Once the new window is loaded, inject the restaurant information into it
-//         newWindow.onload = function() {
-//             // Access the document of the new window
-//             const newWindowDocument = newWindow.document;
-
-//             // Find the element in the new window where you want to display the restaurant information
-//             const restaurantInfoDiv = newWindowDocument.getElementById('result');
-//             const imageSize = 'width="300" height="250"'; //image size
-//             // Check if the element exists in the new window
-//             if (restaurantInfoDiv) {
-//                 // Inject the restaurant information into the element
-//                 restaurantInfoDiv.innerHTML = `
-//                 <img src="${restaurant.image_url}" alt="${restaurant.name}"${imageSize}>
-//                 <h2>${restaurant.name}</h2>
-//                 <p>Rating: ${restaurant.rating}</p>
-//                 <p>Address: ${restaurant.location.display_address}</p>
-//                 <p>Phone: ${restaurant.display_phone}</p>
-//                 <a href="${restaurant.url}" target="_blank" style="color:paleturquoise;"> Yelp </a>
-//                 <p>
-//                 <a href="index.html" style="color: paleturquoise;"> Home Page</a>
-//                 `;
-//             } else {
-//                 // If the element is not found, display an error message
-//                 console.error("Element with ID 'result' not found in the new window.");
-//             }
-//         };
-//     } else {
-//         // If the new window failed to open, display an error message
-//         console.error("Failed to open new window.");
-//     }
-// }
 
 function displayRestaurant(restaurant) {
   // Construct the URL with query parameters containing the restaurant information
