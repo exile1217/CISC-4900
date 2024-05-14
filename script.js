@@ -33,7 +33,7 @@ document.getElementById("gen").addEventListener("click", generateRestaurant);
 
 function generateRestaurant(){ //function for generating restaurant
     console.log("generate button clicked");
-    const latitude = parseFloat(document.getElementById("latitude").value); //maybe should parsefloat??
+    const latitude = parseFloat(document.getElementById("latitude").value); 
     const longitude = parseFloat(document.getElementById("longitude").value);
     //Test and print to console after input
     console.log(latitude);
