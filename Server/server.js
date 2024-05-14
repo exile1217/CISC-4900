@@ -6,10 +6,10 @@ const PORT = process.env.PORT || 3000;
 
 const YELP_API_KEY = 'pxpuU19gDhxBiwnQ4shNHcjX-WOCHr7hy5O6LIvqR38leKvabywinbTNsfSuEG2baO_TIXbSEH7-Mi_fvVF-rGZkF9YmiQeBlUn2cQdhmQNDuLBJXJp1xClUiqzPZXYx';
 
-let currentPage = 0; //Initial page
+
 const pageSize = 50; //Max number of items per request
 let totalResults = 0; //Initial amount of restaurants before api call
-let allResults = []; //Store all restaurants in array
+
 
 
 //Enable CORS for all routes
@@ -23,14 +23,17 @@ app.get('/restaurants', async (req, res) => {
     const { latitude, longitude } = req.query;
 
     try {
-        
+        let currentPage = 0; //Initial page. Reset before fetching new data.
+        let allResults = []; //Store all restaurants in array. Reset before fetching new data.
+
         // Make initial request to get total results
         const initialResponse = await axios.get('https://api.yelp.com/v3/businesses/search', {
             params: {
                 latitude,
                 longitude,
+                categories: 'restaurants',
                 limit: pageSize, //Determines the amount of restaurants per request, in this case 50. 
-                //radius: 300, //10000 meter radius. Use to minimize total results. Can be used as a filter
+                radius: 5000, //Default 5000 meter radius.
                 offset: currentPage * pageSize //Offset determines the range of restaurants per request. 
             },                                 //Offset 0 will return restaurants from 1 to 50, including 50.
                                             //Offset 50 will return restaurants from 51 to 100, including 100.
@@ -41,6 +44,7 @@ app.get('/restaurants', async (req, res) => {
 
         totalResults = initialResponse.data.total; //total amount of results
         console.log('Total Restaurants found: ' + totalResults);
+        console.log(latitude+ ", " + longitude);
 
         // Fetch all results by paginating through the data
         //Yelp has restriction that limit + offset must be < 1000. It is built into the Fusion API.
@@ -52,8 +56,9 @@ app.get('/restaurants', async (req, res) => {
                 params: {
                     latitude,
                     longitude,
+                    categories: 'restaurants', 
                     limit: pageSize,
-                    //radius: 10000,
+                    radius: 5000,
                     offset: currentPage * pageSize 
                 },
                 headers: {
