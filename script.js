@@ -64,7 +64,7 @@ function generateRestaurant(){ //function for generating restaurant
 //Here you make requests to your backend server passing the location data
 function fetchRandomRestaurant(latitude, longitude) {
   // Construct the URL for the backend endpoint passing in location data
-  const backendURL = `http://localhost:3000/restaurants?latitude=${latitude}&longitude=${longitude}`;
+  const backendURL = `https://dinefinder.onrender.com/restaurants?latitude=${latitude}&longitude=${longitude}`;
 
   // Make a GET request to the backend
   fetch(backendURL)
